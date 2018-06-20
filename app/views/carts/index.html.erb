@@ -1,0 +1,32 @@
+<%=render 'shared/pizzas_grid', :index=>false do%>
+  <%if @total_price>0%>
+    <%@delivery_info=DeliveryInfo.new()%>
+    <%@order=Order.new()%>
+
+    <%=label_tag("Total Price: $"+@total_price.to_s)%>
+    <hr>
+
+    <%=form_for(@order) do |f|%>
+      <%=f.label(:payment,"payment method: ")%>
+      <%=f.text_field(:payment)%>
+
+      <br>
+      <%= fields_for :delivery_info  do |cf| %>
+        <%=cf.label(:address1,"Address 1: ")%>
+        <%=cf.text_field :address1%>
+        <br>
+
+        <%=cf.label(:address2,"Address 2: ")%>
+        <%=cf.text_field :address2%>
+        <br>
+        <%=cf.label(:phone,"Phone number: ")%>
+        <%=cf.text_field :phone %>
+      <% end %>
+      <br>
+      <%=f.submit%>
+    <%end%>
+  <%else%>
+
+  <%end%>
+
+<%end%>
